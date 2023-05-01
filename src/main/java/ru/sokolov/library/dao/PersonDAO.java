@@ -25,28 +25,34 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-        return jdbcTemplate.query("SELECT * FROM person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny().orElse(null);
+//        return jdbcTemplate.query("SELECT * FROM person WHERE id = ?", new Object[]{id},
+//                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+
+        return jdbcTemplate.queryForObject("SELECT * FROM person WHERE id = ?", new Object[]{id},
+                new BeanPropertyRowMapper<>(Person.class));
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person (full_name, year_of_birth) VALUES(?, ?)",
+        jdbcTemplate.update("INSERT INTO person (full_name, year_of_birth) VALUES (?, ?)",
                 person.getFullName(), person.getYearOfBirth());
     }
 
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE person SET full_name=?, year_of_birth=? WHERE id=?", updatedPerson.getFullName(),
-                updatedPerson.getYearOfBirth(), id);
+        jdbcTemplate.update("UPDATE person SET full_name = ?, year_of_birth = ? WHERE id = ?",
+                updatedPerson.getFullName(), updatedPerson.getYearOfBirth(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM person WHERE id = ?", id);
     }
 
     // Для валидации уникальности ФИО
     public Optional<Person> getPersonByFullName(String fullName) {
         return jdbcTemplate.query("SELECT * FROM person WHERE full_name = ?", new Object[]{fullName},
                 new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
+//    public Person getPersonByFullName(String fullName) {
+//        return jdbcTemplate.queryForObject("SELECT * FROM person WHERE full_name = ?", new Object[]{fullName},
+//                new BeanPropertyRowMapper<>(Person.class));
     }
 
     // Здесь JOIN не нужен. И так уже получили человека с помощью отдельного метода

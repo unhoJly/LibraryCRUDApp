@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
-  <title>Редактирование человека</title>
+  <title>Редактирование профиля читателя</title>
 </head>
+
 <body>
 
 <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
   <label for="fullName">Введите ФИО: </label>
   <input type="text" th:field="*{fullName}" id="fullName"/>
   <div style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Ошибка в имени</div>
-  <br/>
+  <br/><br/>
   <label for="yearOfBirth">Введите год рождения: </label>
   <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>
   <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">Ошибка в годе рождения</div>
-  <br/>
-
-  <input type="submit" value="Редактировать!"/>
+  <br/><br/>
+  <input type="submit" value="ОК"/>
+  &nbsp;&nbsp;&nbsp;
+<!--  <button th:data-url="@{/people/{id}(id=${person.getId()})}"-->
+<!--          onclick="window.location.origin">Отмена</button>-->
+  <a th:href="@{/people/{id}(id=${person.getId()})}">Отмена</a>
 </form>
-
-<br/>
-<a th:href="@{/people/{id}(id=${person.getId()})}">Отмена</a>
-&nbsp;&nbsp;&nbsp;
-<a href="/people">Главная страница</a>
 
 </body>
 </html>

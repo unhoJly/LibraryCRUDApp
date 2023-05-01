@@ -38,6 +38,7 @@ public class BooksController {
         model.addAttribute("book", bookDAO.show(id));
 
         Optional<Person> bookOwner = bookDAO.getBookOwner(id);
+//        Optional<Person> bookOwner = Optional.ofNullable(bookDAO.getBookOwner(id));
 
         if (bookOwner.isPresent()) {
             model.addAttribute("owner", bookOwner.get());

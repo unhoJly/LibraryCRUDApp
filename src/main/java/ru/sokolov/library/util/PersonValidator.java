@@ -7,6 +7,8 @@ import org.springframework.validation.Validator;
 import ru.sokolov.library.dao.PersonDAO;
 import ru.sokolov.library.models.Person;
 
+import java.util.Optional;
+
 @Component
 public class PersonValidator implements Validator {
 
@@ -29,5 +31,8 @@ public class PersonValidator implements Validator {
         if (personDAO.getPersonByFullName(person.getFullName()).isPresent()) {
             errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
         }
+//        if (Optional.ofNullable(personDAO.getPersonByFullName(person.getFullName())).isPresent()) {
+//            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
+//        }
     }
 }
