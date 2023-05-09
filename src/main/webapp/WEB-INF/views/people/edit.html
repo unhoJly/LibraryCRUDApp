@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Редактирование профиля читателя</title>
+  <title>Редактирование профиля читателя [[${person.getFullName()}]]</title>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
   <br/><br/>
   <input type="submit" value="ОК"/>
   &nbsp;&nbsp;&nbsp;
-<!--  <button th:data-url="@{/people/{id}(id=${person.getId()})}"-->
-<!--          onclick="window.location.origin">Отмена</button>-->
+  <!--  <button th:data-url="@{/people/{id}(id=${person.getId()})}"-->
+  <!--          onclick="window.location.origin">Отмена</button>-->
   <a th:href="@{/people/{id}(id=${person.getId()})}">Отмена</a>
 </form>
 

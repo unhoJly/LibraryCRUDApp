@@ -93,9 +93,9 @@ public class BooksController {
 
     @PatchMapping("/{id}/release")
     public String release(@PathVariable("id") int id) {
-        bookDAO.delete(id);
+        bookDAO.release(id);
 
-        return "redirect:/books" + id;
+        return "redirect:/books/{id}";
     }
 
     @PatchMapping("/{id}/assign")
@@ -103,6 +103,6 @@ public class BooksController {
         // у selectedPerson назначено только поле id, остальные поля - null
         bookDAO.assign(id, selectedPerson);
 
-        return "redirect:/books" + id;
+        return "redirect:/books/{id}";
     }
 }
