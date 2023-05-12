@@ -1,21 +1,19 @@
 package ru.sokolov.library.models;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class Book {
     private int id;
 
-    @NotEmpty(message = "Название книги не может быть пустым")
+    @NotEmpty(message = "Введите название книги")
     @Size(min = 2, max = 100, message = "Название книги должно быть от 2 до 100 символов длиной")
     private String title;
 
-    @NotEmpty(message = "Автор не может быть пустым")
+    @NotEmpty(message = "Введите имя автора")
     @Size(min = 2, max = 100, message = "Имя автора должно быть от 2 до 100 символов длиной")
     private String author;
 
-    @Min(value = 1500, message = "Год должен быть больше, чем 1500 ")
     private int year;
 
     public Book() {

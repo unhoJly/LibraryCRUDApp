@@ -34,7 +34,7 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
+    public String show(@PathVariable int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookDAO.show(id));
 
         Optional<Person> bookOwner = bookDAO.getBookOwner(id);
@@ -66,7 +66,7 @@ public class BooksController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String edit(Model model, @PathVariable int id) {
         model.addAttribute("book", bookDAO.show(id));
 
         return "books/edit";
@@ -74,7 +74,7 @@ public class BooksController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
+                         @PathVariable int id) {
         if (bindingResult.hasErrors()) {
             return "books/edit";
         }
@@ -85,21 +85,21 @@ public class BooksController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable int id) {
         bookDAO.delete(id);
 
         return "redirect:/books";
     }
 
     @PatchMapping("/{id}/release")
-    public String release(@PathVariable("id") int id) {
+    public String release(@PathVariable int id) {
         bookDAO.release(id);
 
         return "redirect:/books/{id}";
     }
 
     @PatchMapping("/{id}/assign")
-    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson) {
+    public String assign(@PathVariable int id, @ModelAttribute("person") Person selectedPerson) {
         // у selectedPerson назначено только поле id, остальные поля - null
         bookDAO.assign(id, selectedPerson);
 
